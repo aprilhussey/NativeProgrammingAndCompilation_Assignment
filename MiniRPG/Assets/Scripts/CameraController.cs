@@ -20,7 +20,8 @@ public class CameraController : MonoBehaviour
 
     public float lookSpeed = 100f;
     private Vector2 lookInput = new Vector2();
-    private float currentLook;
+    private float currentLookY;
+    private float currentLookX;
 
     void Awake()
     {
@@ -55,9 +56,12 @@ public class CameraController : MonoBehaviour
     }
     void Look()
     {
-        currentLook -= lookInput.y * lookSpeed * Time.deltaTime;
+        currentLookY -= lookInput.y * lookSpeed * Time.deltaTime;
         Vector3 localX = GetComponent<Transform>().TransformDirection(Vector3.left);
 
-        GetComponent<Transform>().RotateAround(target.position, localX, currentLook);
+        GetComponent<Transform>().RotateAround(target.position, localX, currentLookY);
+
+        currentLookX += lookInput.x * lookSpeed * Time.deltaTime;
+        GetComponent<Transform>().RotateAround(target.position, Vector3.up, currentLookX);
     }
 }
