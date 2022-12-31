@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour
     public float lookSpeed = 100f;
 
     private float interactInput;
-	private float interactRadius = 0.1f;
+	private const float interactRadius = 3f;
 	public Interactable focus;
 
     Transform cameraTransform;
