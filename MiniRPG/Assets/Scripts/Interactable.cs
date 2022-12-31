@@ -5,11 +5,7 @@ public class Interactable : MonoBehaviour
     // How close the player needs to get to the object to interact with it
     public float radius = 3f;
     public Transform interactionTransform;
-
-    bool isFocus = false;
-    Transform player;
-
-    bool hasInteracted = false;
+    GameObject player;
 
     public virtual void Interact()
     {
@@ -17,31 +13,22 @@ public class Interactable : MonoBehaviour
         Debug.Log("Interacting with " + transform.name);
     }
 
+    void Awake()
+    {
+        player = GameObject.FindWithTag("Player");
+    }
+
     void Update()
     {
-        if (isFocus && !hasInteracted)
-        {
-            float distance = Vector3.Distance(player.position, interactionTransform.position);
+            float distance = Vector3.Distance(interactionTransform.position, player.transform.position);
             if (distance <= radius)
             {
-                Interact();
-                hasInteracted = true;
+                bool interact = PlayerController.instance.Interact();
+                if (interact)
+                {
+                    Interact();
+                }
             }
-        }
-    }
-
-    public void OnFocus(Transform playerTransform)
-    {
-        isFocus = true;
-        player = playerTransform;
-        hasInteracted = false;
-    }
-
-    public void OnDefocus()
-    {
-        isFocus = false;
-        player = null;
-        hasInteracted = false;
     }
 
     void OnDrawGizmosSelected()

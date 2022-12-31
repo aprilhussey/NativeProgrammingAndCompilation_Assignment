@@ -395,7 +395,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lookSpeed: 100
-  focus: {fileID: 0}
 --- !u!114 &77380623
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -766,7 +765,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2934eae74822432499f11a77c7db79f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 3
+  radius: 0.75
   interactionTransform: {fileID: 526391057}
   item: {fileID: 11400000, guid: 6839e6d6bdc61ca43ae6f614187b103a, type: 2}
 --- !u!1 &602989568
@@ -1569,7 +1568,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2934eae74822432499f11a77c7db79f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 3
+  radius: 0.75
   interactionTransform: {fileID: 1718024496}
   item: {fileID: 11400000, guid: 6839e6d6bdc61ca43ae6f614187b103a, type: 2}
 --- !u!65 &1718024493

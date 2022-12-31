@@ -6,23 +6,24 @@ using UnityEngine.AI;
 
 public class PlayerController : MonoBehaviour
 {
+    public static PlayerController instance;
+
     InputActions inputActions;
 
-    //public float speed = 10f;
     private Vector2 movementInput = new Vector2();
 
     public float lookSpeed = 100f;
 
     private float interactInput;
-	private const float interactRadius = 3f;
-	public Interactable focus;
 
     Transform cameraTransform;
 
-    private UnityEngine.AI.NavMeshAgent agent;
+    private NavMeshAgent agent;
 
     void Awake()
     {
+        instance = this;
+
         inputActions = new InputActions();
         inputActions.Enable();
         inputActions.Player.Movement.performed += context => movementInput = context.ReadValue<Vector2>();
@@ -37,7 +38,6 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         Movement();
-        Interact();
     }
 
     void Movement()
@@ -56,70 +56,16 @@ public class PlayerController : MonoBehaviour
 		}
     }
 
-    void Interact()
+    public bool Interact()
     {
 		// If interact is pressed and object is interactable
 		if (interactInput > 0)
         {
-            Collider[] colliderArray = Physics.OverlapSphere(transform.position, interactRadius);
-
-            // Find the closest object
-            Interactable closestObject = null;
-            float closestDistance = float.MaxValue;
-
-			foreach (Collider collider in colliderArray)
-            {
-                // Check if the object has a the Interactable component
-                Interactable interactable = collider.gameObject.GetComponent<Interactable>();
-                if (interactable != null)
-                {
-                    // Calculate the distance to the object
-                    float distance = Vector3.Distance(transform.position, collider.transform.position);
-                    
-                    // Check if this is the closest object so far
-                    if (distance < closestDistance)
-                    {
-                        closestObject = interactable;
-                        closestDistance = distance;
-                    }
-                }
-            }
-            if (closestObject != null)
-            {
-				SetFocus(closestObject);
-			}
+            return true;
 		}
         else // (interactInput < 1)
         {
-            RemoveFocus();
+            return false;
         }
     }
-
-    void SetFocus(Interactable newFocus)
-    {
-        if (newFocus != focus)
-        {
-            if (focus != null)
-            {
-                focus.OnDefocus();
-            }
-            focus = newFocus;
-        }
-        newFocus.OnFocus(transform);
-    }
-
-    void RemoveFocus()
-    {
-        if (focus != null)
-        {
-            focus.OnDefocus();
-        }
-        focus = null;
-    }
-
-	void OnDrawGizmosSelected()
-	{
-		Gizmos.color = Color.green;
-		Gizmos.DrawWireSphere(transform.position, interactRadius);
-	}
 }
