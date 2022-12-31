@@ -23,6 +23,9 @@ public class CameraController : MonoBehaviour
     private float currentLookY;
     private float currentLookX;
 
+    public float maxLookUp = 25f;
+    public float maxLookDown = -25f;
+
     void Awake()
     {
         inputActions = new InputActions();
@@ -59,9 +62,13 @@ public class CameraController : MonoBehaviour
         currentLookY -= lookInput.y * lookSpeed * Time.deltaTime;
         Vector3 localX = GetComponent<Transform>().TransformDirection(Vector3.left);
 
-        GetComponent<Transform>().RotateAround(target.position, localX, currentLookY);
+        // Limit camera rotation
+		currentLookY = Mathf.Clamp(currentLookY, maxLookDown, maxLookUp);
+
+		GetComponent<Transform>().RotateAround(target.position, localX, currentLookY);
 
         currentLookX += lookInput.x * lookSpeed * Time.deltaTime;
-        GetComponent<Transform>().RotateAround(target.position, Vector3.up, currentLookX);
+
+		GetComponent<Transform>().RotateAround(target.position, Vector3.up, currentLookX);
     }
 }

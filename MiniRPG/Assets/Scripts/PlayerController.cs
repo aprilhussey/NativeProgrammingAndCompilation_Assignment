@@ -2,48 +2,58 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.AI;
 
 public class PlayerController : MonoBehaviour
 {
     InputActions inputActions;
 
-    public float speed = 10f;
+    //public float speed = 10f;
     private Vector2 movementInput = new Vector2();
 
     public float lookSpeed = 100f;
-    private Vector2 lookInput = new Vector2();
 
     private float interactInput;
 	private float interactRadius = 0.1f;
 	public Interactable focus;
+
+    Transform cameraTransform;
+
+    private UnityEngine.AI.NavMeshAgent agent;
 
     void Awake()
     {
         inputActions = new InputActions();
         inputActions.Enable();
         inputActions.Player.Movement.performed += context => movementInput = context.ReadValue<Vector2>();
-        inputActions.Player.Look.performed += context => lookInput = context.ReadValue<Vector2>();
         inputActions.Player.Interact.performed += context => interactInput = context.ReadValue<float>();
+
+        agent = GetComponent<NavMeshAgent>();
+
+        cameraTransform = Camera.main.transform;
     }
 
     // Update is called once per frame
     void Update()
     {
         Movement();
-        Look();
         Interact();
     }
 
     void Movement()
     {
-        Vector3 direction = new Vector3(movementInput.x, 0, movementInput.y);
+        if (movementInput.x == 0 && movementInput.y == 0)
+        {
+			agent.updateRotation = false;
+		}
+        else
+        {
+            agent.updateRotation = true;
 
-        GetComponent<Rigidbody>().AddRelativeForce(direction * speed);
-    }
-
-    void Look()
-    {
-        GetComponent<Transform>().Rotate(Vector3.up * lookInput.x * lookSpeed * Time.deltaTime);
+			Vector2 direction = new Vector2(movementInput.x, movementInput.y);
+			// Use the camera's rotation to oriten the movement of the NavMeshAgent
+			agent.destination = transform.position + cameraTransform.rotation * new Vector3(direction.x, 0, direction.y);
+		}
     }
 
     void Interact()
