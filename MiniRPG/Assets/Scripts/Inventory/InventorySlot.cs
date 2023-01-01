@@ -1,12 +1,15 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+// Updates the UI on the slot
+// Functions that happen when interacting with an inventory slot
+
 public class InventorySlot : MonoBehaviour
 {
     Item item;
     public Image icon;
 
-    public void AddItem(Item newItem)
+	public void AddItem(Item newItem)
     {
         item = newItem;
         icon.sprite = item.icon;
@@ -22,7 +25,10 @@ public class InventorySlot : MonoBehaviour
 
     public void DropItem()
     {
-        Inventory.instance.Remove(item);
+        if (item != null)
+        {
+            item.Drop();
+        }
     }
 
     public void UseItem()

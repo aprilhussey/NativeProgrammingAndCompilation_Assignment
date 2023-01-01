@@ -9,9 +9,15 @@ public class Item : ScriptableObject
 
     public virtual void Use()
     {
-        // Usee the item
-        // Something might happen
-
-        Debug.Log("Using " + name);
+		// Use the item
+		// Something might happen
+		Debug.Log("Using " + name);
     }
+
+    public void Drop()
+    {
+		Inventory.instance.Remove(this);
+
+        Debug.Log("Dropping " + name);
+	}
 }

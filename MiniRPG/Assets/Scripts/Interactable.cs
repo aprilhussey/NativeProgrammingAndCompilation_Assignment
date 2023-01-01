@@ -1,7 +1,10 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Interactable : MonoBehaviour
 {
+    InputActions inputActions;
+    
     // How close the player needs to get to the object to interact with it
     public float radius = 3f;
     public Transform interactionTransform;
@@ -15,7 +18,10 @@ public class Interactable : MonoBehaviour
 
     void Awake()
     {
-        player = GameObject.FindWithTag("Player");
+		inputActions = new InputActions();
+		inputActions.Enable();
+
+		player = GameObject.FindWithTag("Player");
     }
 
     void Update()
@@ -23,8 +29,8 @@ public class Interactable : MonoBehaviour
             float distance = Vector3.Distance(interactionTransform.position, player.transform.position);
             if (distance <= radius)
             {
-                bool interact = PlayerController.instance.Interact();
-                if (interact)
+               
+                if (inputActions.Player.Interact.triggered)
                 {
                     Interact();
                 }
