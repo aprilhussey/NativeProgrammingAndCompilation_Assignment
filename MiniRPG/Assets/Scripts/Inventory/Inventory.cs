@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
-    #region Singleton
-    public static Inventory instance;
+	#region Singleton
+	public static Inventory instance;
 
     void Awake()
     {
@@ -14,10 +14,9 @@ public class Inventory : MonoBehaviour
             Debug.LogWarning("More than one instance of Inventory found!");
             return;
         }
-
-        instance = this;
-    }
-    #endregion
+		instance = this;
+	}
+	#endregion
 
     public delegate void OnItemChanged();
     public OnItemChanged onItemChangedCallback;
@@ -33,7 +32,7 @@ public class Inventory : MonoBehaviour
             if (items.Count >= space)
             {
                 Debug.Log("Not enough room");
-                return false; ;
+                return false;
             }
             items.Add(item);
 
