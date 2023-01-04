@@ -10,11 +10,6 @@ public class InventoryUI : MonoBehaviour
     public Transform itemsParent;
     InventorySlot[] slots;
 
-    public GameObject inventoryUI;
-
-    public GameObject uiEventSystem;
-    public GameObject inventoryEventSystem;
-
    void Awake()
     {
 		inputActions = new InputActions();
@@ -29,30 +24,6 @@ public class InventoryUI : MonoBehaviour
 
         slots = itemsParent.GetComponentsInChildren<InventorySlot>();
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        bool inventoryUIActive = inventoryUI.activeInHierarchy;
-
-		if (inventoryUIActive)
-		{
-			Time.timeScale = 0;
-            uiEventSystem.SetActive(false);
-            inventoryEventSystem.SetActive(true);
-		}
-		else
-		{
-			Time.timeScale = 1;
-			inventoryEventSystem.SetActive(false);
-			uiEventSystem.SetActive(true);
-		}
-
-		if (inputActions.Player.Inventory.triggered || inputActions.Inventory.Player.triggered)
-		{
-			inventoryUI.SetActive(!inventoryUI.activeSelf);
-		}
-	}
 
     void UpdateUI()
     {

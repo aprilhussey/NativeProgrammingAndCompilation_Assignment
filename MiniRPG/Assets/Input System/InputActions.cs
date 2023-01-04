@@ -89,6 +89,15 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""cbf6550d-dfac-4767-ad72-05327924b9d7"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -421,6 +430,28 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                     ""action"": ""Look"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""88937faf-a738-4ced-b761-6b807aa37a5e"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard & Mouse"",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""92144243-00d2-443f-960f-1b4f22f68f07"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -1149,6 +1180,7 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
         m_Player_Inventory = m_Player.FindAction("Inventory", throwIfNotFound: true);
+        m_Player_Pause = m_Player.FindAction("Pause", throwIfNotFound: true);
         // Inventory
         m_Inventory = asset.FindActionMap("Inventory", throwIfNotFound: true);
         m_Inventory_NavigateInventory = m_Inventory.FindAction("NavigateInventory", throwIfNotFound: true);
@@ -1231,6 +1263,7 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Jump;
     private readonly InputAction m_Player_Attack;
     private readonly InputAction m_Player_Inventory;
+    private readonly InputAction m_Player_Pause;
     public struct PlayerActions
     {
         private @InputActions m_Wrapper;
@@ -1242,6 +1275,7 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
         public InputAction @Attack => m_Wrapper.m_Player_Attack;
         public InputAction @Inventory => m_Wrapper.m_Player_Inventory;
+        public InputAction @Pause => m_Wrapper.m_Player_Pause;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1272,6 +1306,9 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                 @Inventory.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInventory;
                 @Inventory.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInventory;
                 @Inventory.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInventory;
+                @Pause.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPause;
+                @Pause.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPause;
+                @Pause.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPause;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -1297,6 +1334,9 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                 @Inventory.started += instance.OnInventory;
                 @Inventory.performed += instance.OnInventory;
                 @Inventory.canceled += instance.OnInventory;
+                @Pause.started += instance.OnPause;
+                @Pause.performed += instance.OnPause;
+                @Pause.canceled += instance.OnPause;
             }
         }
     }
@@ -1474,6 +1514,7 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         void OnJump(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
         void OnInventory(InputAction.CallbackContext context);
+        void OnPause(InputAction.CallbackContext context);
     }
     public interface IInventoryActions
     {

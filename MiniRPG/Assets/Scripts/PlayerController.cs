@@ -7,6 +7,12 @@ using UnityEngine.EventSystems;
 
 public class PlayerController : MonoBehaviour
 {
+    [SerializeField] private GameObject inventoryUI;
+	[SerializeField] private GameObject uiEventSystem;
+	[SerializeField] private GameObject inventoryEventSystem;
+
+	[SerializeField] private GameObject pauseMenu;
+    
     InputActions inputActions;
 
     private Vector2 movementInput = new Vector2();
@@ -30,6 +36,8 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         Movement();
+		Inventory();
+		Pause();
     }
 
     void Movement()
@@ -46,5 +54,50 @@ public class PlayerController : MonoBehaviour
 			// Use the camera's rotation to oriten the movement of the NavMeshAgent
 			agent.destination = transform.position + cameraTransform.rotation * new Vector3(direction.x, 0, direction.y);
 		}
+    }
+
+    void Inventory()
+    {
+        if (inputActions.Player.Inventory.triggered || inputActions.Inventory.Player.triggered)
+        {
+            if (!pauseMenu.activeInHierarchy)
+            {
+                if (inventoryUI.activeInHierarchy)
+                {
+                    Time.timeScale = 1f;
+                    inventoryUI.SetActive(false);
+                    uiEventSystem.SetActive(true);
+                    inventoryEventSystem.SetActive(false);
+                }
+                else if (!inventoryUI.activeInHierarchy)
+                {
+                    Time.timeScale = 0f;
+                    inventoryUI.SetActive(true);
+                    uiEventSystem.SetActive(false);
+                    inventoryEventSystem.SetActive(true);
+                }
+            }
+        }
+	}
+
+    void Pause()
+    {
+        if (inputActions.Player.Pause.triggered)
+        {
+            if (!inventoryUI.activeInHierarchy)
+            {
+                if (pauseMenu.activeInHierarchy)
+                {
+					Time.timeScale = 1f; 
+                    pauseMenu.SetActive(false);
+                }
+                else if (!pauseMenu.activeInHierarchy)
+                {
+
+					Time.timeScale = 0f; 
+                    pauseMenu.SetActive(true);
+                }
+            }
+        }
     }
 }
