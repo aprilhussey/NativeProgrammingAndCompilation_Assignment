@@ -8,12 +8,14 @@ using UnityEngine.EventSystems;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private GameObject inventoryUI;
+	[SerializeField] private GameObject inventoryFirstButton;
 	[SerializeField] private GameObject uiEventSystem;
 	[SerializeField] private GameObject inventoryEventSystem;
 
 	[SerializeField] private GameObject pauseMenu;
-    
-    InputActions inputActions;
+	[SerializeField] private GameObject pauseFirstButton;
+
+	InputActions inputActions;
 
     private Vector2 movementInput = new Vector2();
 	public float lookSpeed = 100f;
@@ -75,7 +77,12 @@ public class PlayerController : MonoBehaviour
                     inventoryUI.SetActive(true);
                     uiEventSystem.SetActive(false);
                     inventoryEventSystem.SetActive(true);
-                }
+
+					// Clear selected button
+					EventSystem.current.SetSelectedGameObject(null);
+					// Set selected button
+					EventSystem.current.SetSelectedGameObject(inventoryFirstButton);
+				}
             }
         }
 	}
@@ -96,8 +103,13 @@ public class PlayerController : MonoBehaviour
 
 					Time.timeScale = 0f; 
                     pauseMenu.SetActive(true);
-                }
-            }
+
+					// Clear selected button
+					EventSystem.current.SetSelectedGameObject(null);
+					// Set selected button
+					EventSystem.current.SetSelectedGameObject(pauseFirstButton);
+				}
+			}
         }
     }
 }

@@ -400,9 +400,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventoryUI: {fileID: 1814109398}
+  inventoryFirstButton: {fileID: 1638602972}
   uiEventSystem: {fileID: 1754553039}
   inventoryEventSystem: {fileID: 1701932209}
   pauseMenu: {fileID: 1726144838}
+  pauseFirstButton: {fileID: 775170934}
   lookSpeed: 100
 --- !u!114 &77380623
 MonoBehaviour:
@@ -5540,6 +5542,10 @@ MonoBehaviour:
   pauseMenu: {fileID: 1726144838}
   optionsMenu: {fileID: 953532555}
   creditsMenu: {fileID: 964631905}
+  optionsFirstButton: {fileID: 495707761}
+  optionsClosedButton: {fileID: 1520021626}
+  creditsFirstButton: {fileID: 1440100770}
+  creditsClosedButton: {fileID: 1341667172}
 --- !u!1001 &1894146380
 PrefabInstance:
   m_ObjectHideFlags: 0
