@@ -333,7 +333,7 @@ GameObject:
   - component: {fileID: 77380623}
   - component: {fileID: 77380622}
   - component: {fileID: 77380624}
-  - component: {fileID: 77380626}
+  - component: {fileID: 77380629}
   - component: {fileID: 77380627}
   - component: {fileID: 77380628}
   m_Layer: 0
@@ -480,18 +480,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &77380626
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 77380617}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf933b5c870930948a217d76502a6719, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &77380627
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -519,6 +507,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a0e0f4400c79f94f879e75424fb94bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackSpeed: 1
+  attackDelay: 0.6
+--- !u!114 &77380629
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 77380617}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d3fc28ce31c16b4bb005b8c68718016, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  replaceableAttackAnim: {fileID: 1827226128182048838, guid: 8283fadf2c89507469495f30db8680db, type: 3}
+  defaultAttackAnimSet:
+  - {fileID: 1827226128182048838, guid: db509ad77f9b4f84a8eb1989f589b24c, type: 3}
+  - {fileID: 1827226128182048838, guid: 8283fadf2c89507469495f30db8680db, type: 3}
+  - {fileID: 1827226128182048838, guid: 9a6c3585df66f2e4782635fc7a23494c, type: 3}
+  - {fileID: 1827226128182048838, guid: b267a2c210dbd1d4badc3f270df6d12d, type: 3}
 --- !u!1 &112804262
 GameObject:
   m_ObjectHideFlags: 0
@@ -4995,6 +5003,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a0e0f4400c79f94f879e75424fb94bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackSpeed: 1
+  attackDelay: 0.6
 --- !u!1 &1638602972 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 9151391550921953389, guid: e90b8db01cf70a34ebceaf28b44be8a7, type: 3}

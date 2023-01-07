@@ -7,9 +7,12 @@ public class CharacterCombat : MonoBehaviour
 {
     public float attackSpeed = 1f;
     private float attackCooldown = 0f;
+    const float combatCooldown = 5f;
+    float lastAttackTime;
 
     public float attackDelay = .6f;
 
+    public bool InCombat { get; private set; }
     public event System.Action OnAttack;
 
     private CharacterStats myStats;
@@ -22,6 +25,11 @@ public class CharacterCombat : MonoBehaviour
     void Update()
     {
         attackCooldown -= Time.deltaTime;
+
+        if (Time.time - lastAttackTime > combatCooldown)
+        {
+            InCombat = false;
+        }
     }
 
     public void Attack(CharacterStats targetStats)
@@ -36,6 +44,8 @@ public class CharacterCombat : MonoBehaviour
             }
 
             attackCooldown = 1f / attackSpeed;  // The greater the attack speed the smaller the cooldown
+            InCombat = true;
+            lastAttackTime = Time.time;
         }
     }
 
@@ -43,5 +53,10 @@ public class CharacterCombat : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
 		stats.TakeDamage(myStats.damage.GetValue());
+
+        if (stats.currentHealth <= 0)
+        {
+            InCombat = false;
+        }
 	}
 }
