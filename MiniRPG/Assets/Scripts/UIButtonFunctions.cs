@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
 
 public class UIButtonFunctions : MonoBehaviour
@@ -11,10 +12,16 @@ public class UIButtonFunctions : MonoBehaviour
 
 	[SerializeField] private GameObject optionsFirstButton;
 	[SerializeField] private GameObject optionsClosedButton;
-	[SerializeField] private GameObject creditsFirstButton;
+	
+    [SerializeField] private GameObject creditsFirstButton;
 	[SerializeField] private GameObject creditsClosedButton;
 
-	public void Resume()
+	public void Play()
+    {
+        SceneManager.LoadScene("Game_MAIN");
+    }
+    
+    public void Resume()
     {
         pauseMenu.SetActive(false);
         Time.timeScale = 1.0f;
@@ -50,7 +57,6 @@ public class UIButtonFunctions : MonoBehaviour
         if (optionsMenu.activeInHierarchy)
         {
             optionsMenu.SetActive(false);
-            pauseMenu.SetActive(true);
 
             // Clear selected button
             EventSystem.current.SetSelectedGameObject(null);
@@ -60,7 +66,6 @@ public class UIButtonFunctions : MonoBehaviour
         else if (creditsMenu.activeInHierarchy)
         {
             creditsMenu.SetActive(false);
-            pauseMenu.SetActive(true);
 
 			// Clear selected button
 			EventSystem.current.SetSelectedGameObject(null);
