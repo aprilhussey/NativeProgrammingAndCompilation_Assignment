@@ -335,6 +335,7 @@ GameObject:
   - component: {fileID: 77380624}
   - component: {fileID: 77380626}
   - component: {fileID: 77380627}
+  - component: {fileID: 77380628}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -505,7 +506,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 10
   damage:
-    baseValue: 0
+    baseValue: 1
+--- !u!114 &77380628
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 77380617}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a0e0f4400c79f94f879e75424fb94bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &112804262
 GameObject:
   m_ObjectHideFlags: 0
@@ -4852,6 +4865,7 @@ GameObject:
   - component: {fileID: 1598029779}
   - component: {fileID: 1598029780}
   - component: {fileID: 1598029781}
+  - component: {fileID: 1598029782}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -4969,6 +4983,18 @@ MonoBehaviour:
   maxHealth: 5
   damage:
     baseValue: 1
+--- !u!114 &1598029782
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1598029774}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a0e0f4400c79f94f879e75424fb94bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1638602972 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 9151391550921953389, guid: e90b8db01cf70a34ebceaf28b44be8a7, type: 3}
