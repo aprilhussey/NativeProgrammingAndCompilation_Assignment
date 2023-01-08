@@ -26,15 +26,14 @@ public class Interactable : MonoBehaviour
 
     void Update()
     {
-            float distance = Vector3.Distance(interactionTransform.position, player.transform.position);
-            if (distance <= radius)
+        float distance = Vector3.Distance(interactionTransform.position, player.transform.position);
+        if (distance <= radius)
+        {
+            if (inputActions.Player.Interact.triggered)
             {
-               
-                if (inputActions.Player.Interact.triggered)
-                {
-                    Interact();
-                }
+                Interact();
             }
+        }
     }
 
     void OnDrawGizmosSelected()
