@@ -19,10 +19,12 @@ public class Enemy : Interactable
         base.Interact();
 
         CharacterCombat playerCombat = playerManager.player.GetComponent<CharacterCombat>();
+        Animator enemyAnimator = GetComponent<Animator>();
 
         if (playerCombat != null)
         {
-            playerCombat.Attack(myStats);
+            // This is the player attacking the enemy
+            playerCombat.Attack(myStats, enemyAnimator);
         }
     }
 }
