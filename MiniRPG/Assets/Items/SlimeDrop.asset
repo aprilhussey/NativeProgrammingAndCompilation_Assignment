@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: SlimeDrop
   m_EditorClassIdentifier: 
   name: Slime
-  icon: {fileID: 21300000, guid: aa695d6e295b4fd4698753484453feda, type: 3}
+  icon: {fileID: 21300000, guid: e7a336e90165edc429ab50f626b5b511, type: 3}
   isDefaultItem: 0
+  prefab: {fileID: 2618912617744838644, guid: 048281826186fa04c9dd110884ffc480, type: 3}

@@ -9,6 +9,14 @@ public class InventorySlot : MonoBehaviour
     Item item;
     public Image icon;
 
+    GameObject dropItem;
+	GameObject player;
+
+	void Awake()
+	{
+		player = PlayerManager.instance.player;
+	}
+
 	public void AddItem(Item newItem)
     {
         item = newItem;
@@ -27,8 +35,14 @@ public class InventorySlot : MonoBehaviour
     {
         if (item != null)
         {
+            // Create an instance of the item prefab at the player's position
+			dropItem = Instantiate(item.prefab, player.transform.position, player.transform.rotation);
+
+			Rigidbody rigidbody = item.prefab.GetComponent<Rigidbody>();
+			rigidbody.isKinematic = true;
+			
             item.Drop();
-        }
+		}
     }
 
     public void UseItem()

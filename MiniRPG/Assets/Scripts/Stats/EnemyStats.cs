@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemyStats : CharacterStats
 {
     CharacterAnimator characterAnimator;
+    public GameObject dropObjectPrefab;
 
     void Start()
     {
@@ -15,9 +16,9 @@ public class EnemyStats : CharacterStats
     {
         base.Die();
         StartCoroutine(DeathAnim());
-        
-        // Drop loot
 
+        // Drop loot
+        DropLoot();
     }
 
     IEnumerator DeathAnim()
@@ -26,4 +27,13 @@ public class EnemyStats : CharacterStats
 		yield return new WaitForSeconds(3f);
 		Destroy(gameObject);
 	}
+
+    void DropLoot()
+    {
+        // Create an instance of the object prefab at the enemy's location
+        GameObject dropObject = Instantiate(dropObjectPrefab, transform.position, transform.rotation);
+
+        Rigidbody rigidbody = dropObject.GetComponent<Rigidbody>();
+        rigidbody.isKinematic = true;
+    }
 }
