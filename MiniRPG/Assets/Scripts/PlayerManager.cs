@@ -5,6 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class PlayerManager : MonoBehaviour
 {
+	CharacterAnimator characterAnimator;
+	public GameObject player;
+
 	#region Singleton
 
 	public static PlayerManager instance;
@@ -12,18 +15,19 @@ public class PlayerManager : MonoBehaviour
 	void Awake()
 	{
 		instance = this;
+
+		characterAnimator = player.GetComponent<CharacterAnimator>();
 	}
 
 	#endregion
 
-	public GameObject player;
-
 	public void KillPlayer()
 	{
 		// Player death animation
+		characterAnimator.OnDeath();
 		// Restart prompt
 
 		// testing
-		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+		//SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 	}
 }

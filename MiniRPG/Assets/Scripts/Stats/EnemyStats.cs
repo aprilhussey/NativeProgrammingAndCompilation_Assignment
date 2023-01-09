@@ -4,12 +4,26 @@ using UnityEngine;
 
 public class EnemyStats : CharacterStats
 {
+    CharacterAnimator characterAnimator;
+
+    void Start()
+    {
+		characterAnimator = GetComponent<CharacterAnimator>();
+	}
+
     public override void Die()
     {
         base.Die();
-
-        // Add death animation
-        Destroy(gameObject);
+        StartCoroutine(DeathAnim());
+        
         // Drop loot
+
     }
+
+    IEnumerator DeathAnim()
+    {
+		characterAnimator.OnDeath();
+		yield return new WaitForSeconds(3f);
+		Destroy(gameObject);
+	}
 }
