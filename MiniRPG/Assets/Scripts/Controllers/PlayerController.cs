@@ -101,8 +101,9 @@ public class PlayerController : MonoBehaviour
                 else if (!pauseMenu.activeInHierarchy)
                 {
 
-					Time.timeScale = 0f; 
-                    pauseMenu.SetActive(true);
+					Time.timeScale = 0f;
+					Gamepad.current.SetMotorSpeeds(0, 0);
+					pauseMenu.SetActive(true);
 
 					// Clear selected button
 					EventSystem.current.SetSelectedGameObject(null);

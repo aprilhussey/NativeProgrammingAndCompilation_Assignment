@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(CharacterStats))]
 public class CharacterCombat : MonoBehaviour
@@ -63,5 +64,14 @@ public class CharacterCombat : MonoBehaviour
 		{
 			InCombat = false;
 		}
+
+        StartCoroutine(ControllerRumble());
 	}
+
+    IEnumerator ControllerRumble()
+    {
+        Gamepad.current.SetMotorSpeeds(1, 1);
+        yield return new WaitForSeconds(0.5f);
+        Gamepad.current.SetMotorSpeeds(0, 0);
+    }
 }
