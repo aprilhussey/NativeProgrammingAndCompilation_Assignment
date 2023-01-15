@@ -7,6 +7,8 @@ public class EnemyStats : CharacterStats
     CharacterAnimator characterAnimator;
     public GameObject dropObjectPrefab;
 
+    public Quest quest;
+
     void Start()
     {
 		characterAnimator = GetComponent<CharacterAnimator>();
@@ -15,7 +17,7 @@ public class EnemyStats : CharacterStats
     public override void Die()
     {
         base.Die();
-        StartCoroutine(DeathAnim());
+		StartCoroutine(DeathAnim());
 
         // Drop loot
         DropLoot();

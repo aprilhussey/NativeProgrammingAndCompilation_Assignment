@@ -5,11 +5,23 @@ using UnityEngine.AI;
 
 public class NPC : Interactable
 {
+	InputActions inputActions;
+
+    public Animator dialogueAnimator;
+	public Dialogue dialogue;
+    public GameObject dialogueBox;
+
     Transform target;
     UnityEngine.AI.NavMeshAgent agent;
-    
-    // Start is called before the first frame update
-    void Start()
+
+	void Awake()
+	{
+		inputActions = new InputActions();
+		inputActions.Enable();
+	}
+
+	// Start is called before the first frame update
+	void Start()
     {
         target = PlayerManager.instance.player.transform;
         agent = GetComponent<NavMeshAgent>();
@@ -21,21 +33,15 @@ public class NPC : Interactable
         if (distance <= radius)
         {
             FaceTarget();
-        }
-    }
 
-    public override void Interact()
-    {
-        base.Interact();
-        //open dialogue
-        // if player says yes
-        // checks if player has requested amount of
-        // items in inventory
-        // if true
-        // takes them
-        // if false
-        // dialogue that says, sorry but you don't have enough
-        // please find item for then come back
+            if (inputActions.Player.Interact.triggered)
+            {
+                if (!dialogueAnimator.GetBool("open"))
+                {
+                    Interact();
+                }
+            }
+        }
     }
 
 	void FaceTarget()
@@ -44,4 +50,9 @@ public class NPC : Interactable
 		Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
 		transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
 	}
+
+    public void TriggerDialogue()
+    {
+        FindObjectOfType<DialogueManager>().StartDialogue(dialogue);
+    }
 }

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerStats : CharacterStats
 {
+    public Quest quest;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -13,7 +15,15 @@ public class PlayerStats : CharacterStats
     // Update is called once per frame
     void Update()
     {
-        
+        if (quest.isActive)
+        {
+            //
+            quest.goal.EnemyKilled();
+            if (quest.goal.IsReached())
+            {
+                quest.Complete();
+            }
+        }
     }
 
     public override void Die()
