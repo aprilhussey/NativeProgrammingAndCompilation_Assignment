@@ -9,18 +9,34 @@ public class EnemyStats : CharacterStats
 
     public Quest quest;
 
+    public PlayerStats playerStats;
+
     void Start()
     {
 		characterAnimator = GetComponent<CharacterAnimator>();
+        playerStats = PlayerManager.instance.player.GetComponent<PlayerStats>();
 	}
+
+    void Update()
+    {
+        if (playerStats.quest != null)
+        {
+            quest = playerStats.quest;
+        }
+    }
 
     public override void Die()
     {
         base.Die();
 		StartCoroutine(DeathAnim());
 
-        // Drop loot
-        DropLoot();
+		if (quest != null)
+        {
+			quest.goal.EnemyKilled();
+		}
+
+		// Drop loot
+		DropLoot();
     }
 
     IEnumerator DeathAnim()

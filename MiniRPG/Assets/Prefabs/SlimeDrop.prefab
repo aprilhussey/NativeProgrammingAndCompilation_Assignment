@@ -113,7 +113,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   radius: 0.55
   interactionTransform: {fileID: 2618912617744838650}
-  item: {fileID: 11400000, guid: 6839e6d6bdc61ca43ae6f614187b103a, type: 2}
+  item: {fileID: 11400000, guid: ba18c6dde5562924ba8912ed07236619, type: 2}
 --- !u!54 &2618912617744838647
 Rigidbody:
   m_ObjectHideFlags: 0

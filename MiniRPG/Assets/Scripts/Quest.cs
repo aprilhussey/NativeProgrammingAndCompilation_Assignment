@@ -16,5 +16,7 @@ public class Quest
     {
         isActive = false;
         Debug.Log(title + " was completed");
+
+        PlayerManager.instance.Win();
     }
 }

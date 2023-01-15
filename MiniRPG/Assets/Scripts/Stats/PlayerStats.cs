@@ -17,8 +17,6 @@ public class PlayerStats : CharacterStats
     {
         if (quest.isActive)
         {
-            //
-            quest.goal.EnemyKilled();
             if (quest.goal.IsReached())
             {
                 quest.Complete();

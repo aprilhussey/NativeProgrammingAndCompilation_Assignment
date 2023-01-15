@@ -14,7 +14,7 @@ public class NPC : Interactable
     Transform target;
     UnityEngine.AI.NavMeshAgent agent;
 
-	void Awake()
+	public void Awake()
 	{
 		inputActions = new InputActions();
 		inputActions.Enable();

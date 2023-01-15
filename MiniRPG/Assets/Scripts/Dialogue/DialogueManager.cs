@@ -73,7 +73,6 @@ public class DialogueManager : MonoBehaviour
 
     void EndDialogue()
     {
-        //animator.SetBool("open", false);
 		questMenu.SetActive(true);
 
         Time.timeScale = 0f;

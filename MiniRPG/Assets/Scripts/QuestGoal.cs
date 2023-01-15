@@ -22,18 +22,9 @@ public class QuestGoal
             currentAmount++;
         }
     }
-
-    /*public void ItemCollected()
-    {
-        if (goalType == GoalType.EnemyKilled)
-        {
-            currentAmount++;
-        }
-    }*/
 }
 
 public enum GoalType
 {
-    Kill,
-    Gather
+    Kill
 }

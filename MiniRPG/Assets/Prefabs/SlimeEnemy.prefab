@@ -105,7 +105,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2729d64b868def6418b3091ee429c6df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lookRadius: 10
+  lookRadius: 6
   wanderRadius: 70
   wanderTimer: 30
 --- !u!114 &9065402209409293799
@@ -138,6 +138,15 @@ MonoBehaviour:
   damage:
     baseValue: 1
   dropObjectPrefab: {fileID: 2618912617744838644, guid: 048281826186fa04c9dd110884ffc480, type: 3}
+  quest:
+    isActive: 0
+    title: 
+    description: 
+    goal:
+      goalType: 0
+      requiredAmount: 0
+      currentAmount: 0
+  playerStats: {fileID: 0}
 --- !u!114 &9065402209409293797
 MonoBehaviour:
   m_ObjectHideFlags: 0

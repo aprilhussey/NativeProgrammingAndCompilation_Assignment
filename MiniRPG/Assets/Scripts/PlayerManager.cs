@@ -15,6 +15,9 @@ public class PlayerManager : MonoBehaviour
 	public GameObject deathMenu;
 	public GameObject restartFirstButton;
 
+	public GameObject winMenu;
+	public GameObject playAgainFirstButton;
+
 	#region Singleton
 
 	public static PlayerManager instance;
@@ -53,5 +56,19 @@ public class PlayerManager : MonoBehaviour
 		EventSystem.current.SetSelectedGameObject(null);
 		// Set selected button
 		EventSystem.current.SetSelectedGameObject(restartFirstButton);
+	}
+
+	public void Win()
+	{
+		Gamepad.current.SetMotorSpeeds(0, 0);
+
+		// Stop player movement
+		Time.timeScale = 0;
+
+		winMenu.SetActive(true);
+		// Clear selected button
+		EventSystem.current.SetSelectedGameObject(null);
+		// Set selected button
+		EventSystem.current.SetSelectedGameObject(playAgainFirstButton);
 	}
 }

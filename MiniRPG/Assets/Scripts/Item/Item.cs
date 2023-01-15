@@ -13,6 +13,7 @@ public class Item : ScriptableObject
 		// Use the item
 		// Something might happen
 		Debug.Log("Using " + name);
+        Inventory.instance.Remove(this);
     }
 
     public void Drop()

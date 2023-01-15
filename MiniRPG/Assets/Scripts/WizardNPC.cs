@@ -11,39 +11,54 @@ public class WizardNPC : NPC
 
 	public GameObject questMenu;
 
+	public Animator wizardAnimator;
+
+	public float timeLastEntered;
+
+	public void Awake()
+	{
+		base.Awake();
+		timeLastEntered = Time.time;
+	}
+
 	public override void Interact()
 	{
 		base.Interact();
-		radius = 0.1f;
+		if (timeLastEntered < (Time.time - 3))
+		{
+			wizardAnimator.SetBool("interacting", true);
 
-		dialogueBox.SetActive(true);
+			dialogueBox.SetActive(true);
 
-		TriggerDialogue();
+			TriggerDialogue();
+		}
 	}
 
 	public void AcceptQuest()
 	{
+		this.timeLastEntered = Time.time;
 		questMenu.SetActive(false);
 		quest.isActive = true;
-		
+
 		Time.timeScale = 1f;
-		StartCoroutine(DelayRadius());
+		CloseOut();
 		playerStats.quest = quest;
 	}
 
 	public void DenyQuest()
 	{
+		this.timeLastEntered = Time.time;
 		questMenu.SetActive(false);
 		quest.isActive = false;
 
 		Time.timeScale = 1f;
-		StartCoroutine(DelayRadius());
+		CloseOut();
 	}
 
-	IEnumerator DelayRadius()
+	private void CloseOut()
 	{
 		dialogueAnimator.SetBool("open", false);
-		yield return new WaitForSeconds(0.5f);
-		radius = 2f;
+		wizardAnimator.SetBool("interacting", false);
+		
 	}
 }
