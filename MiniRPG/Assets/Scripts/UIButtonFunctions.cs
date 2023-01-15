@@ -19,6 +19,7 @@ public class UIButtonFunctions : MonoBehaviour
 	public void Play()
     {
         SceneManager.LoadScene("Game_MAIN");
+        Time.timeScale = 1.0f;
     }
     
     public void Resume()
@@ -72,5 +73,16 @@ public class UIButtonFunctions : MonoBehaviour
 			// Set selected button
 			EventSystem.current.SetSelectedGameObject(creditsClosedButton);
 		}
+    }
+
+    public void Restart()
+    {
+        SceneManager.LoadScene("Game_MAIN");
+        Time.timeScale = 1.0f;
+    }
+    
+    public void MainMenu()
+    {
+        SceneManager.LoadScene("Menu_MAIN");
     }
 }
